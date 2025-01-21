@@ -1,4 +1,5 @@
 import Card from '../components/Card';
+import Navbar from '../components/Navbar';
 
 const data = [
   {
@@ -32,23 +33,26 @@ const data = [
 
 const CardProductsPage = () => {
   return (
-    <div className='min-h-screen flex flex-wrap'>
-      {data.map((product) => {
-        return (
-          <Card>
-            <Card.Header
-              src={product.src}
-              alt={product.alt}
-              title={product.title}
-            />
-            <Card.Body
-              description={product.description}
-              price={product.price}
-            />
-          </Card>
-        );
-      })}
-    </div>
+    <>
+      <Navbar />
+      <div className='min-h-screen flex flex-wrap'>
+        {data.map((product) => {
+          return (
+            <Card key={product.id}>
+              <Card.Header
+                src={product.src}
+                alt={product.alt}
+                title={product.title}
+              />
+              <Card.Body
+                description={product.description}
+                price={product.price}
+              />
+            </Card>
+          );
+        })}
+      </div>
+    </>
   );
 };
 

@@ -20,7 +20,9 @@ const Body = ({ description, price }) => {
     <div className='p-2 space-y-1 flex justify-between flex-col min-h-32'>
       <p className='line-clamp-2 text-base'>{description}</p>
       <p className='text-center text-sm'>Rp. {price.toLocaleString('id-ID')}</p>
-      <Button className={'w-full py-1'}>Add to Cart</Button>
+      <Button className={'w-full py-1'} type={'submit'}>
+        Add to Cart
+      </Button>
     </div>
   );
 };

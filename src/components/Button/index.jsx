@@ -1,8 +1,10 @@
-const Button = ({ className, children }) => {
+const Button = ({ className, children, type, onClick }) => {
   return (
     <div className=''>
       <button
-        className={`${className} bg-blue-700 w-24 text-white font-bold rounded-md py-2 text-sm md:text-base`}
+        className={`${className} bg-blue-700 text-white font-bold rounded-md text-sm md:text-base`}
+        type={type}
+        onClick={onClick}
       >
         {children}
       </button>

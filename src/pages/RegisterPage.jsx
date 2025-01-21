@@ -50,7 +50,9 @@ const RegisterPage = () => {
             id={'verifyPassword'}
             type={'password'}
           />
-          <Button className={'w-full'}>Submit</Button>
+          <Button className={'w-full py-2'} type={'submit'}>
+            Submit
+          </Button>
           <p className='text-base text-center'>
             have an account?{' '}
             <Link className={'font-bold text-blue-700'} to={'/'}>
