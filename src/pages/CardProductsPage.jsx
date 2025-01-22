@@ -1,5 +1,6 @@
 import Card from '../components/Card';
 import Navbar from '../components/Navbar';
+import Counter from '../components/Counter';
 
 const data = [
   {
@@ -51,6 +52,9 @@ const CardProductsPage = () => {
             </Card>
           );
         })}
+      </div>
+      <div>
+        <Counter></Counter>
       </div>
     </>
   );
