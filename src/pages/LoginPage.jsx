@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -9,6 +10,13 @@ const LoginPage = () => {
     localStorage.setItem('password', e.target.password.value);
     window.location.href = '/products';
   };
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
   return (
     <div className='min-h-screen flex justify-center items-center'>
       <div className='w-2/3 shadow-2xl p-5 md:w-1/3'>
@@ -25,6 +33,7 @@ const LoginPage = () => {
             required={true}
             id={'username'}
             type={'text'}
+            ref={inputRef}
           />
           <Input
             label={'Password'}
