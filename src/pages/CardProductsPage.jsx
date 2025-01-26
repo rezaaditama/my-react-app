@@ -1,6 +1,6 @@
 import Card from '../components/Card';
 import Navbar from '../components/Navbar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Cart from '../components/Cart';
 
 const data = [
@@ -56,6 +56,7 @@ const data = [
 
 const CardProductsPage = () => {
   const [cart, setCart] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const handleAddToCart = (id) => {
     if (cart.find((product) => id === product.id)) {
@@ -68,6 +69,27 @@ const CardProductsPage = () => {
       setCart([...cart, { id, qty: 1 }]);
     }
   };
+
+  useEffect(() => {
+    const total = cart.reduce((acc, item) => {
+      const product = data.find((product) => product.id === item.id);
+      return acc + product.price * item.qty;
+    }, 0);
+    setTotalPrice(total);
+  }, [cart]);
+
+  useEffect(() => {
+    if (cart.length > 0) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  }, [cart]);
+
+  useEffect(() => {
+    const cartItem = JSON.parse(localStorage.getItem('cart'));
+    if (cartItem) {
+      setCart(cartItem);
+    }
+  }, []);
 
   return (
     <>
@@ -92,20 +114,25 @@ const CardProductsPage = () => {
           })}
         </div>
         <div className='w-1/3 hidden md:block p-2 shadow-2xl'>
-          <Cart>
-            {cart.map((item) => {
-              const product = data.find((product) => item.id === product.id);
-              return (
-                <Cart.Body
-                  key={product.id}
-                  name={product.name}
-                  price={product.price.toLocaleString('id-ID')}
-                  qty={item.qty}
-                  total={(product.price * item.qty).toLocaleString('id-ID')}
-                />
-              );
-            })}
-          </Cart>
+          {cart.length > 0 && (
+            <Cart>
+              {cart.map((item) => {
+                const product = data.find((product) => item.id === product.id);
+                return (
+                  <Cart.Body
+                    key={product.id}
+                    name={product.name}
+                    price={product.price.toLocaleString('id-ID')}
+                    qty={item.qty}
+                    total={(product.price * item.qty).toLocaleString('id-ID')}
+                  />
+                );
+              })}
+              <Cart.Footer>
+                Rp. {totalPrice.toLocaleString('id-ID')}
+              </Cart.Footer>
+            </Cart>
+          )}
         </div>
       </div>
     </>

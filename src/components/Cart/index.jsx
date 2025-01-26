@@ -11,27 +11,38 @@ const Cart = ({ children }) => {
           <th className='w-2/7'>Name</th>
           <th className='w-2/7'>Price</th>
           <th className='w-1/7'>Qty</th>
-          <th className='w-2/7'>Total</th>
+          <th className='w-2/7'>Sub Total</th>
         </tr>
       </thead>
-      <tbody>{children}</tbody>
+      {children}
     </table>
   );
 };
 
 const Body = ({ name, price, qty, total }) => {
   return (
-    <tr className='border-b border-black'>
-      <td className='px-1 text-start line-clamp-1'>{name}</td>
-      <td className='text-center'>Rp. {price}</td>
-      <td className='text-center'>{qty}</td>
-      <td className='text-end'>Rp. {total}</td>
-    </tr>
+    <tbody>
+      <tr className='border-b border-black'>
+        <td className='px-1 text-start line-clamp-1'>{name}</td>
+        <td className='text-center'>Rp. {price}</td>
+        <td className='text-center'>{qty}</td>
+        <td className='text-end'>Rp. {total}</td>
+      </tr>
+    </tbody>
   );
 };
 
-const Footer = () => {
-  return <tfoot>Tota</tfoot>;
+const Footer = ({ children }) => {
+  return (
+    <tfoot>
+      <tr className='border-b border-black'>
+        <td colSpan={'3'} className={'font-bold'}>
+          Total
+        </td>
+        <td className='font-bold text-end'>{children}</td>
+      </tr>
+    </tfoot>
+  );
 };
 
 Cart.Body = Body;
