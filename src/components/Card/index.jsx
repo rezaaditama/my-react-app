@@ -7,7 +7,11 @@ const Card = ({ children, className }) => {
 const Head = ({ src, alt, name }) => {
   return (
     <div className='space-y-2'>
-      <img src={src} alt={alt} className='w-full rounded-t-lg' />
+      <img
+        src={src}
+        alt={alt}
+        className='rounded-t-lg w-full object-fill p-2 h-36 md:h-52'
+      />
       <h1 className='text-center font-bold text-lg line-clamp-1'>{name}</h1>
     </div>
   );
@@ -18,7 +22,7 @@ const Body = ({ description, price, onClick }) => {
     <div className='p-2 space-y-1 flex justify-between flex-col min-h-32'>
       <p className='line-clamp-2 text-base'>{description}</p>
       <p className='text-center text-sm font-bold'>
-        Rp. {price.toLocaleString('id-ID')}
+        $ {price.toLocaleString('en-US')}
       </p>
       <Button className={'w-full py-1'} type={'submit'} onClick={onClick}>
         Add to Cart

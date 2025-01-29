@@ -22,24 +22,26 @@ const Cart = ({ children }) => {
 const Body = ({ name, price, qty, total }) => {
   return (
     <tbody>
-      <tr className='border-b border-black'>
-        <td className='px-1 text-start line-clamp-1'>{name}</td>
-        <td className='text-center'>Rp. {price}</td>
+      <tr className='border-b border-black text-start'>
+        <td className='px-1'>{name.substring(0, 20)} ...</td>
+        <td>$ {price.toLocaleString('en-US')}</td>
         <td className='text-center'>{qty}</td>
-        <td className='text-end'>Rp. {total}</td>
+        <td className='text-end'>$ {total.toLocaleString('en-US')}</td>
       </tr>
     </tbody>
   );
 };
 
-const Footer = ({ children }) => {
+const Footer = ({ totalPrice }) => {
   return (
     <tfoot>
       <tr className='border-b border-black'>
-        <td colSpan={'3'} className={'font-bold'}>
+        <td colSpan={'2'} className={'font-bold'}>
           Total
         </td>
-        <td className='font-bold text-end'>{children}</td>
+        <td className='font-bold text-end' colSpan={'2'}>
+          $ {totalPrice.toLocaleString('en-US')}
+        </td>
       </tr>
     </tfoot>
   );
