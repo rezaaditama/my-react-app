@@ -3,11 +3,13 @@ import Navbar from '../components/Navbar';
 import { useEffect, useState } from 'react';
 import Cart from '../components/Cart';
 import { getAllProducts } from '../services/ProductService';
+import { useLogin } from '../hooks/useAuth';
 
 const CardProductsPage = () => {
   const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [products, setProducts] = useState([]);
+  const username = useLogin();
 
   const handleAddToCart = (id) => {
     if (cart.find((product) => id === product.id)) {
@@ -20,13 +22,6 @@ const CardProductsPage = () => {
       setCart([...cart, { id, qty: 1 }]);
     }
   };
-
-  useEffect(() => {
-    const dataUser = localStorage.getItem('token');
-    if (!dataUser) {
-      window.location.href = '/';
-    }
-  }, []);
 
   useEffect(() => {
     const fetchProducts = async () => {
