@@ -66,10 +66,12 @@ const CardProductsPage = () => {
                     src={product.image}
                     alt={product.title}
                     name={product.title}
+                    id={product.id}
+                    className={'h-36 md:h-52'}
                   />
                   <Card.Body
                     description={product.description}
-                    price={product.price}
+                    price={product.price.toLocaleString('en-US')}
                     onClick={() => handleAddToCart(product.id)}
                   />
                 </Card>
