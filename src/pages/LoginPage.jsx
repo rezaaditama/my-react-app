@@ -1,14 +1,26 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Input from '../components/Input';
+import { login } from '../services/AuthService';
 
 const LoginPage = () => {
-  const handleLogin = (e) => {
+  const [loginFailed, setLoginFailed] = useState('');
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    localStorage.setItem('username', e.target.username.value);
-    localStorage.setItem('password', e.target.password.value);
-    window.location.href = '/products';
+    const data = {
+      username: e.target.username.value,
+      password: e.target.password.value,
+    };
+
+    const response = await login(data);
+    if (response.status) {
+      localStorage.setItem('token', response.token);
+      window.location.href = '/products';
+    } else {
+      setLoginFailed(response.error);
+    }
   };
 
   const inputRef = useRef(null);
@@ -45,6 +57,9 @@ const LoginPage = () => {
           <Button className={'w-full py-2'} type={'submit'}>
             Submit
           </Button>
+          {loginFailed && (
+            <p className='text-center text-red-600'>{loginFailed}</p>
+          )}
           <p className='text-base text-center'>
             Don't have an account?{' '}
             <Link className={'font-bold text-blue-700'} to={'/register'}>

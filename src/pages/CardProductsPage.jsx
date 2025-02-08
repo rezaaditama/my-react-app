@@ -22,6 +22,13 @@ const CardProductsPage = () => {
   };
 
   useEffect(() => {
+    const dataUser = localStorage.getItem('token');
+    if (!dataUser) {
+      window.location.href = '/';
+    }
+  }, []);
+
+  useEffect(() => {
     const fetchProducts = async () => {
       const data = await getAllProducts();
       setProducts(data);
