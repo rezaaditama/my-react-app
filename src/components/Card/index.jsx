@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import Button from '../Button';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/slice/cart';
 
 const Card = ({ children, className }) => {
   return <div className={`${className} shadow-xl p-2 rounded`}>{children}</div>;
@@ -20,14 +22,19 @@ const Head = ({ className, src, alt, name, id }) => {
   );
 };
 
-const Body = ({ className, description, price, onClick }) => {
+const Body = ({ className, description, price, id }) => {
+  const dispact = useDispatch();
   return (
     <div
       className={`${className} p-2 space-y-1 flex justify-between flex-col min-h-32`}
     >
       <p className='line-clamp-2 text-base'>{description}</p>
       <p className='text-center text-sm font-bold'>$ {price}</p>
-      <Button className={'w-full py-1'} type={'submit'} onClick={onClick}>
+      <Button
+        className={'w-full py-1'}
+        type={'submit'}
+        onClick={() => dispact(addToCart({ id, qty: 1 }))}
+      >
         Add to Cart
       </Button>
     </div>
