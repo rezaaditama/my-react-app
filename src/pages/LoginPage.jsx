@@ -1,11 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/Button';
 import Input from '../components/Input';
+import { DarkMode } from '../context/DarkMode';
 import { login } from '../services/AuthService';
 
 const LoginPage = () => {
   const [loginFailed, setLoginFailed] = useState('');
+  const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -30,11 +32,23 @@ const LoginPage = () => {
   }, []);
 
   return (
-    <div className='min-h-screen flex justify-center items-center'>
-      <div className='w-2/3 shadow-2xl p-5 md:w-1/3'>
+    <div
+      className={`min-h-screen flex justify-center items-center ${
+        isDarkMode && 'bg-slate-900 text-white'
+      }`}
+    >
+      <div
+        className={`w-2/3 shadow-2xl p-5 md:w-1/3 ${
+          isDarkMode && 'bg-slate-800 rounded-md'
+        }`}
+      >
         <div className='mb-3'>
           <h1 className='text-blue-700 font-bold text-xl text-center'>Login</h1>
-          <p className='text-sm text-center text-slate-700'>
+          <p
+            className={`text-sm text-center text-slate-700 ${
+              isDarkMode && 'text-white'
+            }`}
+          >
             Welcome, please enter your details
           </p>
         </div>

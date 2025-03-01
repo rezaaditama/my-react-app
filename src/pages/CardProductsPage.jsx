@@ -1,12 +1,14 @@
 import Card from '../components/Card';
 import Navbar from '../components/Navbar';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getAllProducts } from '../services/ProductService';
 import { useLogin } from '../hooks/useAuth';
 import TableCart from '../components/TableCart';
+import { DarkMode } from '../context/DarkMode';
 
 const CardProductsPage = () => {
   const [products, setProducts] = useState([]);
+  const { isDarkMode, setIsDarkMode } = useContext(DarkMode);
   useLogin();
 
   useEffect(() => {
@@ -18,7 +20,7 @@ const CardProductsPage = () => {
   }, []);
 
   return (
-    <>
+    <div className={isDarkMode && 'bg-slate-900 text-white'}>
       <Navbar />
       <div className='flex'>
         <div className='flex flex-wrap md:w-2/3 p-2 box-border'>
@@ -46,7 +48,7 @@ const CardProductsPage = () => {
           <TableCart products={products} />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

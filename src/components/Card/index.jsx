@@ -14,7 +14,7 @@ const Head = ({ className, src, alt, name, id }) => {
         <img
           src={src}
           alt={alt}
-          className={`${className} p-2 rounded-t-lg w-full object-contain`}
+          className={`${className} p-2 rounded-t-lg w-full object-contain bg-white`}
         />
         <h1 className='text-center font-bold text-lg line-clamp-1'>{name}</h1>
       </Link>
