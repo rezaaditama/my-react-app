@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useTotalPrice, useTotalPriceDispatch } from '../../context/TotalPrice';
 import Cart from '../Cart';
 
 const TableCart = ({ products }) => {
   const cart = useSelector((state) => state.cart.data);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const dispatch = useTotalPriceDispatch();
+  const { total } = useTotalPrice();
 
   useEffect(() => {
     const total = cart.reduce((acc, item) => {
@@ -12,7 +14,12 @@ const TableCart = ({ products }) => {
       if (!product) return acc;
       return acc + product.price * item.qty;
     }, 0);
-    setTotalPrice(total);
+    dispatch({
+      type: 'UPDATE',
+      payload: {
+        total: total,
+      },
+    });
   }, [cart, products]);
 
   useEffect(() => {
@@ -36,7 +43,7 @@ const TableCart = ({ products }) => {
           />
         );
       })}
-      <Cart.Footer totalPrice={totalPrice} />
+      <Cart.Footer totalPrice={total} />
     </Cart>
   );
 };

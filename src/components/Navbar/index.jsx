@@ -29,7 +29,7 @@ const Navbar = () => {
         {totalCart}
       </div>
       <Button
-        className={`p-2 ${isDarkMode && 'bg-white text-slate-900'}`}
+        className={`p-2 ${isDarkMode && 'text-black bg-white '}`}
         type={'button'}
         onClick={() => setIsDarkMode(!isDarkMode)}
       >
